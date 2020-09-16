@@ -15,8 +15,8 @@ import moment from 'moment';
 import queryString from 'query-string';
 
 class History extends Component {
-    myHeaderValueOverread = 
-      `<div class="ag-cell-label-container" role="presentation">
+  myHeaderValueOverread =
+    `<div class="ag-cell-label-container" role="presentation">
           <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>
           <div ref="eLabel" class="ag-header-cell-label" role="presentation">
             <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-receipt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -25,8 +25,8 @@ class History extends Component {
             </svg>
           </div>
         </div>`;
-    myHeaderValueId = 
-      `<div class="ag-cell-label-container" role="presentation">
+  myHeaderValueId =
+    `<div class="ag-cell-label-container" role="presentation">
           <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>
           <div ref="eLabel" class="ag-header-cell-label" role="presentation">
             <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-tag-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -39,8 +39,8 @@ class History extends Component {
             <span ref="eSortNone" class="ag-header-icon ag-sort-none-icon" ></span>
           </div>
         </div>`;
-    myHeaderValueStarted = 
-      `<div class="ag-cell-label-container" role="presentation">
+  myHeaderValueStarted =
+    `<div class="ag-cell-label-container" role="presentation">
           <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>
           <div ref="eLabel" class="ag-header-cell-label" role="presentation">
             <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-clock-history" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -56,8 +56,8 @@ class History extends Component {
             <span ref="eFilter" class="ag-header-icon ag-filter-icon"></span>
           </div>
         </div>`;
-    myHeaderValuePerson = 
-      `<div class="ag-cell-label-container" role="presentation">
+  myHeaderValuePerson =
+    `<div class="ag-cell-label-container" role="presentation">
           <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>
           <div ref="eLabel" class="ag-header-cell-label" role="presentation">
             <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -71,8 +71,8 @@ class History extends Component {
             <span ref="eFilter" class="ag-header-icon ag-filter-icon"></span>
           </div>
         </div>`;
-      myHeaderValueGroup = 
-        `<div class="ag-cell-label-container" role="presentation">
+  myHeaderValueGroup =
+    `<div class="ag-cell-label-container" role="presentation">
           <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>
           <div ref="eLabel" class="ag-header-cell-label" role="presentation">
             <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -86,17 +86,17 @@ class History extends Component {
               <span ref="eSortNone" class="ag-header-icon ag-sort-none-icon" ></span>
             </div>
           </div>`;
-          myEmptyHeader = 
-          `<div class="ag-cell-label-container" role="presentation">
+  myEmptyHeader =
+    `<div class="ag-cell-label-container" role="presentation">
               <span ref="eMenu" class="ag-header-icon ag-header-cell-menu-button"></span>
               <div ref="eLabel" class="ag-header-cell-label" role="presentation">
               </div>
             </div>`;
-    
-  
+
+
   gridApi = null;
   unlisten = null;
-  
+
   state = {
     historyItems: [],
 
@@ -106,7 +106,8 @@ class History extends Component {
         sortable: false,
         filter: false,
         headerComponentParams: {
-          template: this.myHeaderValueOverread },
+          template: this.myHeaderValueOverread
+        },
         cellRendererFramework: OverreadIcon,
       },
       {
@@ -118,11 +119,11 @@ class History extends Component {
         headerName: "Started", field: "started", width: 180,
         valueGetter: 'data',
         sortable: true, filter: false,
-        comparator: (a,b) => {
+        comparator: (a, b) => {
           return moment(b.started).diff(a.started);
-        }, 
+        },
         autoHeight: true, autoWidth: true,
-        cellStyle: { whiteSpace: 'normal', lineHeight: '1.5' }, 
+        cellStyle: { whiteSpace: 'normal', lineHeight: '1.5' },
         headerComponentParams: { template: this.myHeaderValueStarted },
         cellRendererFramework: SessionDuration
       },
@@ -151,16 +152,16 @@ class History extends Component {
         headerName: "Empty", autoWidth: 500, field: "empty",
         sortable: false, filter: false,
         headerComponentParams: {
-        template: this.myEmptyHeader
-      }
-    },
-  ],
+          template: this.myEmptyHeader
+        }
+      },
+    ],
     rowData: [
       // { make: "Toyota", model: "Celica", price: { min: 35000, max: 100000 }, year: 2015 },
       // { make: "Ford", model: "Mondeo", price: { min: 32000, max: 100000 }, year: 2015 },
       // { make: "Porsche", model: "Boxter", price: { min: 72000, max: 100000 }, year: 2015 }
-    ], 
-    
+    ],
+
     detailCellRenderer: 'myDetailCellRenderer',
     frameworkComponents: { myDetailCellRenderer: DetailCellRenderer },
 
@@ -172,22 +173,15 @@ class History extends Component {
   async componentDidMount() {
 
     console.log('componentDidMount');
-    
+
     const items = await historyAPI.getHistoryItems();
     this.setState({ rowData: items });
-  
-    
-    //this.setState({ historyItems: items });
-    
-    // const newItems = this.prepareItems(items);
-    // this.setState({ rowData : newItems });
-    
-    
-    }
-  
+
+  }
+
   customUpdateStatus = (location) => {
 
-    //console.log('customUpdateStatus');
+    console.log('customUpdateStatus');
     const parsed = queryString.parse(location.search);
     if (parsed.page) {
       console.log('customUpdateStatus ==> paginationGoToPage', Number(parsed.page));
@@ -198,10 +192,9 @@ class History extends Component {
   webHistoryListener = (location, action) => {
     //console.log('HISTORY Event:', location, action);
 
+    console.log("webHistoryListener")
     if (location.pathname === '/history') {
-      console.log('------2-------');
       this.customUpdateStatus(location);
-
     }
   }
 
@@ -216,7 +209,7 @@ class History extends Component {
   }
 
   prepareItems = (items) => {
-    return items.map(item => ({ ...item, duration: this.getDuration(item.started, item.ended) }));
+    return itemFs.map(item => ({ ...item, duration: this.getDuration(item.started, item.ended) }));
   }
 
   getOverreadHeaderIcon = () => {
@@ -236,47 +229,53 @@ class History extends Component {
       </svg>`
     );
   }
-  
+
   handlePagination = (params) => {
-    
+
     // do some action only when grid is ready
-    
-    //gridApi = null;
-    //unlisten = null;
-  
-    if (this.unlisten){
+
+    // gridApi = null;
+    // unlisten = null;
+
+    if (this.unlisten) {
       let parsed = queryString.parse(this.props.location.search);
-      
+
       console.log("update queryparam from", parsed.page, "to", params.api.paginationGetCurrentPage() + 1);
 
       parsed.page = params.api.paginationGetCurrentPage() + 1;
       this.props.history.push(`?${queryString.stringify(parsed)}`);
     }
-    else{
+    else {
       console.log("HANDLEPagination waiting");
     }
 
   }
 
-  handleGridReady = (params) => { 
-    console.log("GRID READY"); 
+  handleGridReady = (params) => {
+    console.log("GRID READY");
     this.gridApi = params.api;
-    
-    
-  }
-  
-  handleFirst = (param) => {
-    console.log('first');
+
     //bind event
     this.unlisten = this.props.history.listen(this.webHistoryListener);
+
+    this.customUpdateStatus(this.props.location);
   
-    
-    console.log("---1------");
-    this.customUpdateStatus(this.props.location);  
+    //get grid page
+    //set grid pagealways to 2
+    //this.gridApi.paginationGoToPage(1);
+
+  }
+
+  handleFirst = (param) => {
+    //console.log('first --- binding events');
   }
 
   handleRow = (param) => {
     console.log(param.rowIndex);
+  }
+
+  handleSort = (param) => {
+    console.log(param);
   }
 
   render() {
@@ -293,25 +292,25 @@ class History extends Component {
         }}
         >
           <AgGridReact pagination="true" paginationPageSize='6'
-          style={{width: '100%', height: '100%'}}
+            style={{ width: '100%', height: '100%' }}
             masterDetail='true'
             enableColResize='true'
             suppressCellSelection='true'
             columnDefs={this.state.columnDefs}
             rowData={this.state.rowData}
-            
+
             detailCellRenderer={this.state.detailCellRenderer}
             frameworkComponents={this.state.frameworkComponents}
-            
+
             onGridReady={this.handleGridReady}
             onPaginationChanged={this.handlePagination}
             onFirstDataRendered={this.handleFirst}
             onRowClicked={this.handleRow}
-            
-            //detailCellRendererParams={this.state.detailCellRendererParams}
-            //paginationChanged={this.handlePagination}
-            //sortChanged={this.handlePagination}
-            //onHeaderClick={this.handlePagination}
+            onSortChanged={this.handleSort}
+          //detailCellRendererParams={this.state.detailCellRendererParams}
+          //paginationChanged={this.handlePagination}
+          //sortChanged={this.handlePagination}
+          //onHeaderClick={this.handlePagination}
           >
           </AgGridReact>
         </div>
