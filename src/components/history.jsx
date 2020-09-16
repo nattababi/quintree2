@@ -3,9 +3,11 @@ import * as historyAPI from '../services/historyService';
 import HistoryHeader from './historyHeader';
 import HistoryTable from './historyTable';
 import Pagination from './pagination';
-import { AgGridReact, AgGridColumn } from 'ag-grid-react';
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-material.css';
+
+// import { AgGridReact, AgGridColumn } from 'ag-grid-react';
+// import 'ag-grid-community/dist/styles/ag-grid.css';
+// import 'ag-grid-community/dist/styles/ag-theme-material.css';
+
 import OverreadIcon from './helpers/overreadIcon';
 import SessionDuration from './helpers/sessionDuration';
 import MyHeaderComponent from './helpers/myHeaderComponent';
@@ -98,6 +100,15 @@ class History extends Component {
   unlisten = null;
 
   state = {
+
+    movies: [],
+    genres: [],
+    currentPage: 1,
+    pageSize: 4,
+    currentGenre: "All Genres",
+    sortColumn: { path: "title", order: 'asc' },
+    currentSearch: '',
+  
     historyItems: [],
 
     columnDefs: [
@@ -175,7 +186,7 @@ class History extends Component {
     console.log('componentDidMount');
 
     const items = await historyAPI.getHistoryItems();
-    this.setState({ rowData: items });
+    this.setState({ historyItems: items });
 
   }
 
@@ -209,7 +220,7 @@ class History extends Component {
   }
 
   prepareItems = (items) => {
-    return itemFs.map(item => ({ ...item, duration: this.getDuration(item.started, item.ended) }));
+    return items.map(item => ({ ...item, duration: this.getDuration(item.started, item.ended) }));
   }
 
   getOverreadHeaderIcon = () => {
@@ -281,40 +292,12 @@ class History extends Component {
   render() {
 
     const result = this.getPagedData();
+    console.log("---------", result);
+
     //console.log('--------out array----', this.state.rowData);
 
     return (
       <div style={{ marginTop: '10px', color: '#9e9e9e' }}>
-        <HistoryHeader />
-        <div className="ag-theme-material" style={{
-          height: '400px',
-          width: '100%', marginTop: '3px', color: '#424242'
-        }}
-        >
-          <AgGridReact pagination="true" paginationPageSize='6'
-            style={{ width: '100%', height: '100%' }}
-            masterDetail='true'
-            enableColResize='true'
-            suppressCellSelection='true'
-            columnDefs={this.state.columnDefs}
-            rowData={this.state.rowData}
-
-            detailCellRenderer={this.state.detailCellRenderer}
-            frameworkComponents={this.state.frameworkComponents}
-
-            onGridReady={this.handleGridReady}
-            onPaginationChanged={this.handlePagination}
-            onFirstDataRendered={this.handleFirst}
-            onRowClicked={this.handleRow}
-            onSortChanged={this.handleSort}
-          //detailCellRendererParams={this.state.detailCellRendererParams}
-          //paginationChanged={this.handlePagination}
-          //sortChanged={this.handlePagination}
-          //onHeaderClick={this.handlePagination}
-          >
-          </AgGridReact>
-        </div>
-
         <HistoryHeader />
         <HistoryTable
           history={result} />
@@ -324,3 +307,18 @@ class History extends Component {
 }
 
 export default History;
+
+//<HistoryTabe
+//user={user}
+//overreads={result.data}
+//sortColumn={sortColumn}
+//onLikeClick={this.handleLikeToggle}
+//onProgressClick={this.handleProgressbar}
+//onMovieDelete={this.handleDelete}
+//onSort={this.handleSort}
+///>
+//<Pagination
+//itemsCount={result.totalCount}
+//pageSize={pageSize}
+//currentPage={currentPage}
+//onPageChange={this.handlePageChange} />  
