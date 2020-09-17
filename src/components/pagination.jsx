@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 
 class Pagination extends Component {
 
-  onInputPageChange = (param) =>{
-    console.log("-------!!--------", param.currentTarget.value);
-    this.props.onPageChange(param.currentTarget.value);
+  onInputSliderChange = (param) =>{
+    this.props.onSliderChange(param.currentTarget.value);
   }
 
   onPrev = (page) => {
@@ -26,8 +25,8 @@ class Pagination extends Component {
   }
   render() {
     
-    const { itemsCount, pageSize, currentPage, onPageChange } = this.props;
-
+    const { itemsCount, pageSize, currentPage, sliderValue, onPageChange } = this.props;
+    
     const pagesCount = Math.ceil(itemsCount / pageSize);
   
     if (pagesCount === 1) {
@@ -72,13 +71,14 @@ class Pagination extends Component {
         <input
           type="range"
           className="custom-range"
-          min="1"
-          max={pagesCount}
-          step="0.01" 
+          min="100"
+          max={pagesCount*100}
+          step="1" 
           id="customRange3"
-          value={currentPage}
-          onChange={this.onInputPageChange}>
+          value={sliderValue}
+          onChange={this.onInputSliderChange}>
         </input>
+
       </div>
     );
   }

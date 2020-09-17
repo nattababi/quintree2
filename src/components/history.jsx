@@ -21,7 +21,8 @@ class History extends Component {
 
   state = {
 
-    currentPage: 3,
+    currentPage: 1,
+    sliderValue: 100,
     pageSize: 1,
     sortColumn: { path: "title", order: 'asc' },
 
@@ -44,11 +45,12 @@ class History extends Component {
 
   customUpdateStatus = (location) => {
 
-    console.log('customUpdateStatus');
     const parsed = queryString.parse(location.search);
     if (parsed.page) {
-      console.log("!!!!!!!!!!!!!!!!!!!", Number(parsed.page));
-      this.setState({ currentPage: Number(parsed.page) });
+      const currentPage = Number(parsed.page);
+      const sliderValue = Number(parsed.page)*100;
+      //const sliderValue = this.sliderValue;
+      this.setState({ currentPage, sliderValue });
     }
   }
 
@@ -105,19 +107,37 @@ class History extends Component {
   }
 
   handlePagination = (page) => {
-    console.log('pagination changed', page);
+    
+    // // update slider
+    console.log("UPDATE SLIDER TO", page*100);
+
+    this.setState({sliderValue: page*100});//this.sliderValue = page;
 
     //preserve current query
     let parsed = queryString.parse(this.props.location.search);
 
-    parsed.page = Math.ceil(page);
+    parsed.page = page;
 
     const url = `?${queryString.stringify(parsed)}`;
 
-    console.log(url);
-
     this.props.history.push(url); // with history
 
+  }
+  handleSlider = (value) => {
+
+    // change current page
+    this.currentPage = Math.ceil(value/100);
+
+    //update url
+    let parsed = queryString.parse(this.props.location.search);
+
+    parsed.page = this.currentPage;
+
+    const url = `?${queryString.stringify(parsed)}`;
+
+    this.props.history.push(url);
+
+    //this.setState({sliderValue: value});
   }
 
   render() {
@@ -125,12 +145,8 @@ class History extends Component {
     const result = this.getPagedData();
     //const result = this.state.historyItems;
 
-    const { pageSize, currentPage } = this.state;
+    const { pageSize, currentPage, sliderValue } = this.state;
     //const { pageSize, currentPage, genres, currentGenre, sortColumn } = this.state;
-
-    //console.log(pageSize, currentPage);
-
-    console.log('zzzzzz', result.length, result.totalCount, result);
 
     return (
       <div style={{ marginTop: '10px', color: '#9e9e9e' }}>
@@ -143,7 +159,9 @@ class History extends Component {
           //itemsCount={result.totalCount}
           pageSize={pageSize}
           currentPage={currentPage}
+          sliderValue={sliderValue}
           onPageChange={this.handlePagination}
+          onSliderChange={this.handleSlider}
         />
       </div>
     );
