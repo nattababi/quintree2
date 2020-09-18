@@ -22,7 +22,6 @@ class History extends Component {
   state = {
 
     currentPage: 1,
-    sliderValue: 100,
     pageSize: 1,
     sortColumn: { path: "title", order: 'asc' },
 
@@ -33,14 +32,22 @@ class History extends Component {
   async componentDidMount() {
 
     console.log('componentDidMount');
-
+    
     const items = await historyAPI.getHistoryItems();
     this.setState({ historyItems: items });
+    
 
+    console.log('------------------2-----------------');
+    
     //bind event
     this.unlisten = this.props.history.listen(this.webHistoryListener);
-
+    
+    console.log('------------------3-----------------');
+    
     this.customUpdateStatus(this.props.location);
+    
+    console.log('------------------4-----------------');
+    
   }
 
   customUpdateStatus = (location) => {
@@ -48,15 +55,11 @@ class History extends Component {
     const parsed = queryString.parse(location.search);
     if (parsed.page) {
       const currentPage = Number(parsed.page);
-      const sliderValue = Number(parsed.page)*100;
-      //const sliderValue = this.sliderValue;
-      this.setState({ currentPage, sliderValue });
+      this.setState({ currentPage });
     }
   }
 
   webHistoryListener = (location, action) => {
-    //console.log('HISTORY Event:', location, action);
-
     console.log("webHistoryListener")
     if (location.pathname === '/history') {
       this.customUpdateStatus(location);
@@ -77,7 +80,6 @@ class History extends Component {
     const overreadsSorted = _.orderBy(overreadsFiltered, [sortColumn.path], [sortColumn.order]);;
     const overreadsPaginated = paginate(overreadsSorted, currentPage, pageSize);
 
-    console.log(overreadsPaginated);
     return overreadsPaginated;
     //return overreadsFiltered;
     //return this.state.historyItems;
@@ -108,11 +110,6 @@ class History extends Component {
 
   handlePagination = (page) => {
     
-    // // update slider
-    console.log("UPDATE SLIDER TO", page*100);
-
-    this.setState({sliderValue: page*100});//this.sliderValue = page;
-
     //preserve current query
     let parsed = queryString.parse(this.props.location.search);
 
@@ -123,29 +120,13 @@ class History extends Component {
     this.props.history.push(url); // with history
 
   }
-  handleSlider = (value) => {
-
-    // change current page
-    this.currentPage = Math.ceil(value/100);
-
-    //update url
-    let parsed = queryString.parse(this.props.location.search);
-
-    parsed.page = this.currentPage;
-
-    const url = `?${queryString.stringify(parsed)}`;
-
-    this.props.history.push(url);
-
-    //this.setState({sliderValue: value});
-  }
 
   render() {
 
     const result = this.getPagedData();
     //const result = this.state.historyItems;
 
-    const { pageSize, currentPage, sliderValue } = this.state;
+    const { pageSize, currentPage } = this.state;
     //const { pageSize, currentPage, genres, currentGenre, sortColumn } = this.state;
 
     return (
@@ -159,9 +140,7 @@ class History extends Component {
           //itemsCount={result.totalCount}
           pageSize={pageSize}
           currentPage={currentPage}
-          sliderValue={sliderValue}
           onPageChange={this.handlePagination}
-          onSliderChange={this.handleSlider}
         />
       </div>
     );

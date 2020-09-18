@@ -97,6 +97,7 @@ class HistoryTable extends Component {
           style={{ 
             backgroundColor: "#fff",
             marginTop: '2px',
+            marginBottom: '1px',
             color: '#424242',
             border: '0' }}>
           <tbody>
