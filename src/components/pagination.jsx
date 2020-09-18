@@ -6,17 +6,12 @@ import queryString from 'query-string';
 
 class Pagination extends Component {
 
-  state = {
-    sliderValue: 100
-  };
-
   async componentDidMount() {
     console.log("SLIDER DID MOUNT");
   }
 
   onInputSliderChange = (param) => {
-    this.state.sliderValue = param.currentTarget.value;
-    this.props.onPageChange(Math.round(this.state.sliderValue / 100));
+    this.props.onPageChange(param.currentTarget.value);
   }
 
   onPrev = (page) => {
@@ -38,9 +33,7 @@ class Pagination extends Component {
 
     const { itemsCount, pageSize, currentPage, onPageChange } = this.props;
 
-    if (Math.round(this.state.sliderValue / 100) !== currentPage) {
-      this.state.sliderValue = currentPage * 100;
-    }
+    console.log('current', currentPage);
 
     const pagesCount = Math.ceil(itemsCount / pageSize);
 
@@ -86,11 +79,11 @@ class Pagination extends Component {
         <input
           type="range"
           className="custom-range"
-          min="100"
-          max={pagesCount * 100}
+          min="1"
+          max={pagesCount}
           step="1"
           id="customRange3"
-          value={this.state.sliderValue}
+          value={currentPage}
           onChange={this.onInputSliderChange}
         >
         </input>
