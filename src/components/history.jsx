@@ -18,16 +18,17 @@ import queryString from 'query-string';
 class History extends Component {
 
   unlisten = null;
-
+  
   state = {
 
     currentPage: 1,
-    pageSize: 1,
+    pageSize: 6,
     sortColumn: { path: "title", order: 'asc' },
 
     historyItems: [],
 
   };
+
 
   async componentDidMount() {
 
@@ -36,17 +37,10 @@ class History extends Component {
     const items = await historyAPI.getHistoryItems();
     this.setState({ historyItems: items });
     
-
-    console.log('------------------2-----------------');
-    
     //bind event
     this.unlisten = this.props.history.listen(this.webHistoryListener);
     
-    console.log('------------------3-----------------');
-    
     this.customUpdateStatus(this.props.location);
-    
-    console.log('------------------4-----------------');
     
   }
 
@@ -81,9 +75,6 @@ class History extends Component {
     const overreadsPaginated = paginate(overreadsSorted, currentPage, pageSize);
 
     return overreadsPaginated;
-    //return overreadsFiltered;
-    //return this.state.historyItems;
-    //return overreadsSorted;
   }
 
   prepareItems = (items) => {
@@ -163,3 +154,4 @@ export default History;
 //pageSize={pageSize}
 //currentPage={currentPage}
 //onPageChange={this.handlePageChange} />  
+
