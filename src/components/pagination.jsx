@@ -79,8 +79,8 @@ class Pagination extends Component {
         <input
           type="range"
           className="custom-range"
-          min="1"
-          max={pagesCount}
+          min="100"
+          max={pagesCount * 100}
           step="1"
           id="customRange3"
           value={currentPage}
