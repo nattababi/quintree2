@@ -29,7 +29,7 @@ class NavBar extends Component {
                 <Link className="nav-item nav-link" to="/dashboard" style={{ color: '#fff' }}>DASHBOARD</Link>
               </li>
               <li className="nav-item">
-                <button className="btn btn-primary m-2" style={{ color: '#fff', backgroundColor: '#FF6E40', border: 'none', borderRadius: 2 }} >NEW PATIENT ENCOUNTER</button>
+                <button className="btn btn-primary m-2" style={{ color: '#fff', backgroundColor: '#FF6E40', border: 'none', borderRadius: 2 }}>NEW PATIENT ENCOUNTER</button>
               </li>
               <li className="nav-item nav-link active">
                 <Link className="nav-item nav-link" to="/groups" style={{ color: '#fff' }}>GROUPS</Link>

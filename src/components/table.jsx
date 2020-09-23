@@ -5,7 +5,8 @@ import TableBody from './tableBody';
 class Table extends Component {
 
   render() {
-    const { columns, sortColumn, onSort, data } = this.props;
+  
+    const { columns, sortColumn, onSort, onDetails, data } = this.props;
 
   return (
     <div>
@@ -17,7 +18,7 @@ class Table extends Component {
           color: '#424242',
           border: '0' }}>
         <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
-        <TableBody data={data} columns={columns} />
+        <TableBody data={data} columns={columns} onDetails={onDetails}/>
       </table>
     </div>
   );

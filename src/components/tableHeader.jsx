@@ -42,9 +42,6 @@ class TableHeader extends Component {
 
     const { columns, sortColumn, onSort } = this.props;
 
-    //console.log("Table",columns);
-    //console.log("DEF SORTCOL 3", sortColumn);
-
     return (
       // <thead>
       // <tr>

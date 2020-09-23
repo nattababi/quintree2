@@ -37,23 +37,28 @@ class TableBody extends Component {
     return ( d1.format('ll')  );
   }
 
+  onDetails = (item) => {
+    //call
+    this.props.onDetails(item);
+  }
+
   render() {
 
-    const { data, columns } = this.props;
+    const { data, columns, onDetails } = this.props;
 
     return (
       <tbody>
           {/* ------------TABLE DATA-------------   */}
           {data.map(item => 
-          <tr key={item.sessionId} style={{ marginTop: '0px', marginBottom: '0px' }}>
+          <tr key={item.sessionId} style={{ marginTop: '0px', marginBottom: '0px' }}
+            className='clickable' onClick={() => this.onDetails(item)}>
               <td>{this.getOverreadIcon(item.exists)}</td>
               <td>{item.sessionId}</td>
               <td>{this.getTime(item.started)} <p style={{ marginBottom: '0px' }}>{this.getDuration(item.started,item.ended)} minutes</p></td>
               <td>{item.provider}</td>
               <td>{item.expert}</td>
               <td>{item.group}</td>
-          </tr>
-              )}
+          </tr>)}
         </tbody>
     );
   }

@@ -4,6 +4,7 @@ import HistoryHeader from './historyHeader';
 import HistoryTable from './historyTable';
 import Pagination from './pagination';
 import { paginate } from '../utils/paginate';
+import Input from './input';
 import _ from 'lodash';
 
 // import OverreadIcon from './helpers/overreadIcon';
@@ -51,6 +52,8 @@ class History extends Component {
 
     const newState = {};
 
+    newState.currentSearch = parsed.search;
+
     if (parsed.page) {
       const currentPage = Number(parsed.page);
       newState.currentPage = currentPage;
@@ -77,14 +80,20 @@ class History extends Component {
 
   getPagedData = () => {
 
-    const { pageSize, currentPage, historyItems: allOverreads, sortColumn } = this.state;
+    const { pageSize, currentPage, currentSearch, historyItems: allOverreads, sortColumn } = this.state;
     //const { pageSize, currentPage, movies: allMovies, currentGenre, sortColumn, currentSearch } = this.state;
 
-    let overreadsFiltered = allOverreads;
+    let overreadsFiltered = currentSearch ? allOverreads.filter(x => 
+      x.provider.toLowerCase().includes(currentSearch.toLowerCase()) ||
+      x.expert.toLowerCase().includes(currentSearch.toLowerCase()) ||
+      x.group.toLowerCase().includes(currentSearch.toLowerCase())
+      ) : allOverreads;
+    //let overreadsFiltered = allOverreads;
     const overreadsSorted = _.orderBy(overreadsFiltered, [sortColumn.path], [sortColumn.order]);;
     const overreadsPaginated = paginate(overreadsSorted, currentPage, pageSize);
 
-    return overreadsPaginated;
+    //return overreadsPaginated;
+    return { totalCount: overreadsFiltered.length, data: overreadsPaginated};
   }
 
 
@@ -123,6 +132,29 @@ class History extends Component {
 
   }
 
+  handleDetails = (item) => {
+    console.log('row clicked', item);
+  }
+
+  handleSearch = ({ currentTarget: input }) => {
+    //preserve current query
+    let parsed = queryString.parse(this.props.location.search);
+
+    if (input.value) {
+      parsed.search = input.value;
+      if (parsed.page) {
+        //delete parsed.page;// = 1;
+        parsed.page = 1;
+      }
+    }
+    else {
+      delete parsed.search;
+    }
+
+    const url = `?${queryString.stringify(parsed)}`;
+    this.props.history.push(url); // with history
+  }
+
   render() {
 
     const result = this.getPagedData();
@@ -136,14 +168,17 @@ class History extends Component {
       <div style={{ marginTop: '10px', color: '#9e9e9e' }}>
         
         <HistoryHeader />
+        <Input style={{  }} placeholder="Search"
+          onChange={this.handleSearch}
+          value={this.state.currentSearch} />
         <HistoryTable
-          overreads={result}
+          overreads={result.data}
           sortColumn={sortColumn}
           onSort={this.handleSort}
+          onDetails={this.handleDetails}
         />
         <Pagination
-          itemsCount={this.state.historyItems.length}
-          //itemsCount={result.totalCount}
+          itemsCount={result.totalCount}
           pageSize={pageSize}
           currentPage={currentPage}
           onPageChange={this.handlePagination}
