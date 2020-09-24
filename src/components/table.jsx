@@ -8,20 +8,20 @@ class Table extends Component {
   
     const { columns, sortColumn, onSort, onDetails, data } = this.props;
 
-  return (
-    <div>
-      <table className="table"
-        style={{ 
-          backgroundColor: "#fff",
-          marginTop: '2px',
-          marginBottom: '1px',
-          color: '#424242',
-          border: '0' }}>
-        <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
-        <TableBody data={data} columns={columns} onDetails={onDetails}/>
-      </table>
-    </div>
-  );
+    return (
+      <div>
+        <table className="table"
+          style={{ 
+            backgroundColor: "#fff",
+            marginTop: '2px',
+            marginBottom: '1px',
+            color: '#424242',
+            border: '0' }}>
+          <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
+          <TableBody data={data} columns={columns} onDetails={onDetails}/>
+        </table>
+      </div>
+    );
 }
 }
 

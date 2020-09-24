@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import queryString from 'query-string';
-import { isThrowStatement } from 'typescript';
+//import { Link } from 'react-router-dom';
+//import queryString from 'query-string';
+//import { isThrowStatement } from 'typescript';
 
 class Pagination extends Component {
 

@@ -1,9 +1,9 @@
 import http from "./httpService";
 
-const apiHistory = '/histories';
+const apiSession = '/sessions';
 
-export async function getHistoryItems() {
-  const { data: history } = await http.get(apiHistory);
+export async function getHistoryItems(param) {
+  const { data: history } = await http.get(apiSession, { params: param });
   return history;
 }
 
