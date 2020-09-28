@@ -1,0 +1,34 @@
+.row-expanded {
+  background: #03A99E;
+  color : #fff;
+  cursor: pointer;
+}
+
+.row-clickable {
+  cursor: pointer;
+}
+
+.row-clickable:hover {
+  background-color: #f2f2f2;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child-provider {
+  flex: 0 1 160px;
+}
+
+.flex-child-expert {
+  flex: 1;
+}
+
+.flex-child-icon {
+  flex: 0 0 16px;
+}
+
+.flex-child-text {
+  flex: 1;
+  margin-top: 5px;
+}

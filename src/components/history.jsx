@@ -4,7 +4,7 @@ import HistoryHeader from './historyHeader';
 import HistoryTable from './historyTable';
 import Pagination from './pagination';
 import Input from './input';
-//import _ from 'lodash';
+import _ from 'lodash';
 import queryString from 'query-string';
 
 class History extends Component {
@@ -22,7 +22,6 @@ class History extends Component {
     currentSearch: ''
 
   };
-
 
   async componentDidMount() {
 
@@ -64,9 +63,10 @@ class History extends Component {
     const newState = {};
 
     newState.total = total;
-    
-    if (parsed.search) {
-      newState.currentSearch = parsed.search;
+
+    newState.currentSearch = parsed.search;
+    if (!parsed.search) {
+      newState.currentSearch = '';
     }
 
     if (parsed.page) {
@@ -85,6 +85,7 @@ class History extends Component {
 
     newState.historyItems = items;
     this.setState(newState);
+
   }
 
   webHistoryListener = (location, action) => {
@@ -99,7 +100,7 @@ class History extends Component {
     this.unlisten();
   }
 
-    handleSort = (sortColumn) => {
+  handleSort = (sortColumn) => {
 
     //preserve current query
     let parsed = queryString.parse(this.props.location.search);
@@ -125,7 +126,19 @@ class History extends Component {
   }
 
   handleDetails = (item) => {
-    console.log('row clicked', item);
+    //console.log('row clicked', item);
+    
+    this.setState({historyItems: this.state.historyItems});
+
+    //set other items.extended to false
+    this.state.historyItems.forEach(element => {
+      if (element.sessionId === item.sessionId){
+        element.extended = (element.extended) ? false : true;
+      }
+      else{
+        element.extended = false
+      }
+    });
   }
 
   handleSearch = ({ currentTarget: input }) => {
@@ -144,15 +157,24 @@ class History extends Component {
     }
 
     const url = `?${queryString.stringify(parsed)}`;
-    this.props.history.push(url); // with history
+
+    //setState for input
+    this.setState({ currentSearch: input.value });
+
+    // debounce url update
+    this.updateSearch(url);
   }
+
+  updateSearch = _.debounce((url) => {
+    this.props.history.push(url);
+  }, 500);
 
   render() {
 
     const result = this.state.historyItems;
 
     const { pageSize, currentPage, sortColumn, total, currentSearch } = this.state;
-    
+
     return (
       <div style={{ marginTop: '10px', color: '#9e9e9e' }}>
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-
+import styles from './table.module.css';
+import RowDetails from './rowDetails';
 
 class TableBody extends Component {
 
@@ -50,15 +51,25 @@ class TableBody extends Component {
       <tbody>
           {/* ------------TABLE DATA-------------   */}
           {data.map(item => 
-          <tr key={item.sessionId} style={{ marginTop: '0px', marginBottom: '0px' }}
-            className='clickable' onClick={() => this.onDetails(item)}>
+          <React.Fragment>
+          <tr key={item.sessionId} style={{ marginTop: '0px', marginBottom: '0px'}}
+            className={item.extended ? styles['row-expanded'] : styles['row-clickable']} onClick={() => this.onDetails(item)}>
               <td>{this.getOverreadIcon(item.exists)}</td>
               <td>{item.sessionId}</td>
               <td>{this.getTime(item.started)} <p style={{ marginBottom: '0px' }}>{this.getDuration(item.started,item.ended)} minutes</p></td>
               <td>{item.provider}</td>
               <td>{item.expert}</td>
               <td>{item.group}</td>
-          </tr>)}
+          </tr>
+          
+          {item.extended && 
+          <tr key={item.sessionId + "extension"} >
+            <td colSpan="6">
+              <RowDetails data={item}/>
+            </td>
+          </tr>}
+          </React.Fragment>
+          )}
         </tbody>
     );
   }

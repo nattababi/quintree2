@@ -16,7 +16,10 @@ class Table extends Component {
             marginTop: '2px',
             marginBottom: '1px',
             color: '#424242',
-            border: '0' }}>
+            border: '0', 
+            fontFamily: "Helvetica",
+            //Helvetica,Arial,sans-serif
+            fontSize: 13}}>
           <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
           <TableBody data={data} columns={columns} onDetails={onDetails}/>
         </table>

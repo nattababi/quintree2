@@ -81,9 +81,3 @@ input[type='range']::-webkit-slider-thumb {
   top: 8px; // don't change this
   background: #777;
 } */
-
-.clickable {
-  cursor: pointer;
-}
-
-tr:hover { background-color: #f2f2f2; }
