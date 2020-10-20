@@ -3,6 +3,7 @@ import http from "./httpService";
 const apiSession = '/sessions';
 
 export async function getHistoryItems(param) {
+
   const { data: history } = await http.get(apiSession, { params: param });
   return history;
 }

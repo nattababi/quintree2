@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 class Pagination extends Component {
 
-  step = 5;
+  step = 3;
 
   async componentDidMount() {
     //console.log("SLIDER DID MOUNT");
@@ -54,6 +54,7 @@ class Pagination extends Component {
 
     // [startWith..endWith].map
     const pages = _.range(startWith, endWith + 1);
+    //const pages = _.range(startWith, endWith);
 
     return (
       <div style={{ backgroundColor: '#fafafa', fontWeight: 'bold', padding: '1em', fontSize: '14px', marginTop: '0px' }}>

@@ -1,0 +1,12 @@
+
+.flex-form {
+  display: flex;
+}
+
+.flex-child-label {
+  flex: 0 1 90px;
+}
+
+.flex-child-element {
+  flex: 1;
+}

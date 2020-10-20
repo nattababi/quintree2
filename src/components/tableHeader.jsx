@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './table.module.css';
 
 class TableHeader extends Component {
 
@@ -17,8 +18,8 @@ class TableHeader extends Component {
       <path fillRule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
     </svg>
 
-    // <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    //   <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+    // <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-arrow-down-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    //   <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
     // </svg>
   };
 
@@ -41,28 +42,18 @@ class TableHeader extends Component {
   render() {
 
     const { columns, sortColumn } = this.props;
-
+  
     return (
-      // <thead>
-      // <tr>
-      //   <td>{this.getOverreadHeaderIcon()}</td>
-      //   <td>{this.getIdIcon()} ID </td>
-      //   <td>{this.getHistoryIcon()} Started/Duration </td>
-      //   <td>{this.getProviderIcon()} Provider </td>
-      //   <td>{this.getExpertIcon()} Expert </td>
-      //   <td>{this.getGroupIcon()} Group </td>
-      // </tr>
-      // </thead>
       <thead>
-        <tr>
-          {columns.map(column =>
-            <td className="clickable" style={column.style}
-              key={column.path || column.key}
-              onClick={() => this.raiseSort(column.path)}>
-              {column.icon} {column.label} {this.renderSortIcon(column)}
-            </td>)}
-        </tr>
-      </thead>
+         <tr>
+           {columns.map(column =>
+             <td className={styles['header-clickable']} style={column.style}
+               key={column.path || column.key}
+               onClick={() => this.raiseSort(column.path)}>
+               {column.icon} {column.label} {this.renderSortIcon(column)}
+             </td>)}
+         </tr>
+       </thead>
     );
   }
 }

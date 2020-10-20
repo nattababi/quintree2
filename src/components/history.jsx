@@ -32,11 +32,17 @@ class History extends Component {
     parsed.page = this.state.currentPage;
     parsed.pageSize = this.state.pageSize;
 
-    const result = await historyAPI.getHistoryItems(parsed);
-
-    const items = result.overreads;
+    let result = null;
+    try {
+      result = await historyAPI.getHistoryItems(parsed);
+    }
+    catch (err) {
+      console.log("ERROR", err.message);
+    }
+    
+    const items = result.sessions;
     const total = result.total;
-
+    
     this.setState({ historyItems: items, total });
 
     //bind event
@@ -55,9 +61,16 @@ class History extends Component {
       parsed.pageSize = this.state.pageSize;
     }
 
-    const result = await historyAPI.getHistoryItems(parsed);
 
-    const items = result.overreads;
+    let result = null;
+    try {
+      result = await historyAPI.getHistoryItems(parsed);
+    }
+    catch (err) {
+      console.log("ERROR", err.message);
+    }
+
+    const items = result.sessions;
     const total = result.total;
 
     const newState = {};
@@ -84,6 +97,7 @@ class History extends Component {
     }
 
     newState.historyItems = items;
+    console.log(items);
     this.setState(newState);
 
   }
@@ -127,15 +141,15 @@ class History extends Component {
 
   handleDetails = (item) => {
     //console.log('row clicked', item);
-    
-    this.setState({historyItems: this.state.historyItems});
+
+    this.setState({ historyItems: this.state.historyItems });
 
     //set other items.extended to false
     this.state.historyItems.forEach(element => {
-      if (element.sessionId === item.sessionId){
+      if (element.sessionId === item.sessionId) {
         element.extended = (element.extended) ? false : true;
       }
-      else{
+      else {
         element.extended = false
       }
     });
@@ -177,7 +191,6 @@ class History extends Component {
 
     return (
       <div style={{ marginTop: '10px', color: '#9e9e9e' }}>
-
         <HistoryHeader />
         <Input style={{}} placeholder="Search"
           onChange={this.handleSearch}

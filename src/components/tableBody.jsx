@@ -47,6 +47,8 @@ class TableBody extends Component {
 
     const { data, columns } = this.props;
 
+    if (!data) return null;
+    
     return (
       <tbody>
           {/* ------------TABLE DATA-------------   */}

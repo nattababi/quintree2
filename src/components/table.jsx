@@ -9,7 +9,7 @@ class Table extends Component {
     const { columns, sortColumn, onSort, onDetails, data } = this.props;
 
     return (
-      <div>
+      <div style={{overflowX: "auto", overflowY: "auto"}}>
         <table className="table"
           style={{ 
             backgroundColor: "#fff",

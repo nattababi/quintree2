@@ -1,3 +1,8 @@
+
+.header-clickable {
+  cursor: pointer;
+}
+
 .row-expanded {
   background: #03A99E;
   color : #fff;

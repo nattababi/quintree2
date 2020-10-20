@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import NavBar from './components/navBar';
@@ -6,12 +6,30 @@ import History from './components/history';
 import Dashboard from './components/dashboard';
 import Groups from './components/groups';
 import Users from './components/users';
+import LoginForm from './components/loginForm';
+import RegisterForm from './components/registerForm';
+import Logout from './components/logout';
+import auth from './services/authService';
 
-function App() {
-  return (
-    <main className="container">
+class App extends Component {
+  
+  state = {};
+
+  componentDidMount() {
+    const user = auth.getCurrentUser();
+    this.setState({ user });
+    console.log('CDM', user);
+  }
+
+  render() {
+
+    const { user } = this.state;
+    console.log('RENDER USER', user);
+    
+    return (
+      <main className="container">
         {/* <NavBar user={user} /> */}
-        <NavBar />
+        <NavBar  user={user}/>
          <Switch> 
           {/* <ProtectedRoute 
             path="/movies/:id"
@@ -23,11 +41,15 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/groups" component={Groups} />
           <Route path="/users" component={Users} />
+          <Route path="/login" component={LoginForm} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/register" component={RegisterForm} />
           {/* <Redirect exact from="/" to="/session" /> */}
           {/* <Redirect to="/not-found" /> */}
         </Switch>
-    </main>
-  );
+      </main>
+    );
+  }
 }
 
 export default App;

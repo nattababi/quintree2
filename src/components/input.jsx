@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './form.module.css';
 
 class Input extends Component {
   state = {}
@@ -6,14 +7,13 @@ class Input extends Component {
     const {name, label, error, ...rest} = this.props;
 
     return (
-      <div className="form-group" style={{ marginTop: '5px', marginBottom: '0px'}}>
-        {/* <label htmlFor={this.props.name}>{this.props.label}</label> */}
-        <input
-          {...rest}
-          name={name}
-          id={name}
-          className="form-control" />
-        {error && <div className="alert alert-danger">{error}</div>}
+        <div>
+          <input
+            {...rest}
+            name={name}
+            id={name}
+            className="form-control" />
+          {error && <div className="alert alert-danger">{error}</div>}
       </div>
 
     );

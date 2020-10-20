@@ -58,7 +58,7 @@ class HistoryTable extends Component {
 
     const { overreads, sortColumn, onSort, onDetails } = this.props;
     
-   return (
+    return (
       <Table columns={this.columns}
         sortColumn={sortColumn}
         data={overreads}
