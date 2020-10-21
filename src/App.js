@@ -28,7 +28,6 @@ class App extends Component {
     
     return (
       <main className="container">
-        {/* <NavBar user={user} /> */}
         <NavBar  user={user}/>
          <Switch> 
           {/* <ProtectedRoute 
