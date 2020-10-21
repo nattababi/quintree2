@@ -192,7 +192,7 @@ class History extends Component {
     return (
       <div style={{ marginTop: '10px', color: '#9e9e9e' }}>
         <HistoryHeader />
-        <Input style={{}} placeholder="Search"
+        <Input style={{marginTop: '2px'}} placeholder="Search"
           onChange={this.handleSearch}
           value={currentSearch} />
         <HistoryTable

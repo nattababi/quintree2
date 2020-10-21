@@ -47,16 +47,16 @@ class NavBar extends Component {
                 <button className="btn btn-secondary dropdown-toggle" style={{backgroundColor: '#03a99e', border: '0', fontSize: '14px'}} type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-person-fill m2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                  </svg> Profile
+                  </svg> {this.props.user.firstName}
                 </button>
                 <div className="dropdown-menu" ariaLabelledby="dropdownMenuButton">
                   <Link className="dropdown-item" to="/profile" style={{ fontSize: '13px'}}>
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-person-fill m2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-person-fill m-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fillRule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     </svg> Profile
                   </Link>
                   <Link className="dropdown-item" to="/logout" style={{ fontSize: '13px'}}>
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-door-open m2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-door-open m-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fillRule="evenodd" d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"/>
                       <path fillRule="evenodd" d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"/>
                       <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>

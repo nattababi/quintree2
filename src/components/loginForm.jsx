@@ -41,11 +41,11 @@ class LoginForm extends Form {
     if (auth.getCurrentUser()) return <Redirect to="/" />;
     return (
       <React.Fragment>
-        <div style={{ marginTop: '10px', width:"500px"}}>
+        <div style={{ marginTop: '10px', width:"350px"}}>
           <LoginFormHeader/>
         </div>
 
-        <div style={{ padding:'5px', marginTop: '5px', width:"500px", backgroundColor: '#fafafa'}}>
+        <div style={{ padding:'5px', marginTop: '4px', width:"350px", backgroundColor: '#fafafa'}}>
           <form onSubmit={this.handleSubmit}>
               {this.renderInputWithLabel('email', 'Email')}
               {this.renderInputWithLabel('password', 'Password', 'password')}

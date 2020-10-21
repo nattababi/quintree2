@@ -13,7 +13,6 @@ class Table extends Component {
         <table className="table"
           style={{ 
             backgroundColor: "#fff",
-            marginTop: '2px',
             marginBottom: '1px',
             color: '#424242',
             border: '0', 
