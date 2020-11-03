@@ -32,18 +32,28 @@ class History extends Component {
     parsed.page = this.state.currentPage;
     parsed.pageSize = this.state.pageSize;
 
-    let result = null;
-    try {
-      result = await historyAPI.getHistoryItems(parsed);
-    }
-    catch (err) {
-      console.log("ERROR", err.message);
-    }
+    // let result = null;
+    // try {
+    //   result = await historyAPI.getHistoryItems(parsed);
+    // }
+    // catch (err) {
+    //   console.log("ERROR", err.message);
+    // }
     
-    const items = result.sessions;
-    const total = result.total;
     
-    this.setState({ historyItems: items, total });
+    // let items = null, total = 0, newState = {};
+    
+    // try {
+    //   items = result.sessions;
+    //   total = result.total;
+    // }
+    // catch (err) {
+    //   items = null;
+    //   total = 0;
+    //   console.log("ERROR", err.message);
+    // }
+
+    //  this.setState({ historyItems: items, total });
 
     //bind event
     this.unlisten = this.props.history.listen(this.webHistoryListener);
@@ -61,7 +71,6 @@ class History extends Component {
       parsed.pageSize = this.state.pageSize;
     }
 
-
     let result = null;
     try {
       result = await historyAPI.getHistoryItems(parsed);
@@ -69,12 +78,21 @@ class History extends Component {
     catch (err) {
       console.log("ERROR", err.message);
     }
+    
+    let items = null, total = 0, newState = {};
+    
+    console.log(result);
 
-    const items = result.sessions;
-    const total = result.total;
-
-    const newState = {};
-
+    try {
+      items = result.sessions;
+      total = result.total;
+    }
+    catch (err) {
+      items = null;
+      total = 0;
+      console.log("ERROR", err.message);
+    }
+    
     newState.total = total;
 
     newState.currentSearch = parsed.search;

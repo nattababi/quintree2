@@ -9,6 +9,7 @@ import Users from './components/users';
 import LoginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
 import Logout from './components/logout';
+import Profile from './components/profile';
 import auth from './services/authService';
 
 class App extends Component {
@@ -28,7 +29,7 @@ class App extends Component {
     
     return (
       <main className="container">
-        <NavBar  user={user}/>
+        <NavBar  user={user}/> 
          <Switch> 
           {/* <ProtectedRoute 
             path="/movies/:id"
@@ -43,6 +44,7 @@ class App extends Component {
           <Route path="/login" component={LoginForm} />
           <Route path="/logout" component={Logout} />
           <Route path="/register" component={RegisterForm} />
+          <Route path="/user" component={Profile} />
           {/* <Redirect exact from="/" to="/session" /> */}
           {/* <Redirect to="/not-found" /> */}
         </Switch>
