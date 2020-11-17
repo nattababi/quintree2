@@ -25,35 +25,14 @@ class History extends Component {
 
   async componentDidMount() {
 
+    //console.log("store user history=",this.props.store.user.firstName);
+
     console.log('componentDidMount');
 
     const parsed = queryString.parse(this.props.location.search);
 
     parsed.page = this.state.currentPage;
     parsed.pageSize = this.state.pageSize;
-
-    // let result = null;
-    // try {
-    //   result = await historyAPI.getHistoryItems(parsed);
-    // }
-    // catch (err) {
-    //   console.log("ERROR", err.message);
-    // }
-    
-    
-    // let items = null, total = 0, newState = {};
-    
-    // try {
-    //   items = result.sessions;
-    //   total = result.total;
-    // }
-    // catch (err) {
-    //   items = null;
-    //   total = 0;
-    //   console.log("ERROR", err.message);
-    // }
-
-    //  this.setState({ historyItems: items, total });
 
     //bind event
     this.unlisten = this.props.history.listen(this.webHistoryListener);
@@ -232,18 +211,4 @@ class History extends Component {
 
 export default History;
 
-//<HistoryTabe
-//user={user}
-//overreads={result.data}
-//sortColumn={sortColumn}
-//onLikeClick={this.handleLikeToggle}
-//onProgressClick={this.handleProgressbar}
-//onMovieDelete={this.handleDelete}
-//onSort={this.handleSort}
-///>
-//<Pagination
-//itemsCount={result.totalCount}
-//pageSize={pageSize}
-//currentPage={currentPage}
-//onPageChange={this.handlePageChange} />  
 

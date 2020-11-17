@@ -4,7 +4,10 @@ import Joi from 'joi-browser';
 import { Redirect } from 'react-router-dom';
 import auth from '../services/authService';
 import LoginFormHeader from './loginFormHeader';
+import { observable, action } from 'mobx';
+import { inject } from 'mobx-react';
 
+@inject('userStore')
 class LoginForm extends Form {
   state = {
     data: { email: '', password: '' },
@@ -19,10 +22,12 @@ class LoginForm extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      await auth.login(data.email, data.password);
+      await this.props.userStore.login(data);
 
       const { state } = this.props.location;
-      window.location = state ? state.from.pathname : '/';
+      //window.location = state ? state.from.pathname : '/';
+      console.log('redirect to history');
+      this.props.history.push('/history');
     }
     catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -41,17 +46,18 @@ class LoginForm extends Form {
     if (auth.getCurrentUser()) return <Redirect to="/" />;
     return (
       <React.Fragment>
-        <div style={{ marginTop: '10px', width:"350px"}}>
-          <LoginFormHeader/>
+        <div style={{ marginTop: '10px', width: "350px" }}>
+          <LoginFormHeader />
         </div>
 
-        <div style={{ padding:'5px', marginTop: '4px', width:"350px", backgroundColor: '#fafafa'}}>
+        <div style={{ padding: '5px', marginTop: '4px', width: "350px", backgroundColor: '#fafafa' }}>
           <form onSubmit={this.handleSubmit}>
-              {this.renderInputWithLabel('email', 'Email')}
-              {this.renderInputWithLabel('password', 'Password', 'password')}
-              {this.renderButton("Login")}
+            {this.renderInputWithLabel('email', 'Email')}
+            {this.renderInputWithLabel('password', 'Password', 'password')}
+            {this.renderButton("Login")}
           </form>
         </div>
+        
       </React.Fragment>
     );
   }

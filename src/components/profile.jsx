@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 
 class Profile extends Component {
+
   render() {
     return (
       <div>

@@ -10,13 +10,13 @@ class Pagination extends Component {
   step = 3;
 
   async componentDidMount() {
-    //console.log("SLIDER DID MOUNT");
+    //console.log("DID MOUNT pagination");
   }
-
+  
   onInputSliderChange = (param) => {
     this.props.onPageChange(Math.round(param.currentTarget.value));
   }
-
+  
   onPrev = (page) => {
     this.props.onPageChange(page - 1);
   }
@@ -31,14 +31,17 @@ class Pagination extends Component {
     const nextpage = page + 10 < lastpage ? page + 10 : lastpage;
     this.props.onPageChange(nextpage);
   }
-
+  
   render() {
-
+    
+    //console.log("RENDER pagination");
+    
     const { itemsCount, pageSize, currentPage, onPageChange } = this.props;
 
     const pagesCount = Math.ceil(itemsCount / pageSize);
+    console.log("PAGESCOUNT>>>>>", itemsCount, pageSize, ":", pagesCount);
 
-    if (pagesCount === 1) {
+    if (pagesCount === 0) {
       return null;
     }
 
@@ -49,7 +52,7 @@ class Pagination extends Component {
     
     if ((endWith - startWith < 2*this.step) && (endWith - startWith)){
       // count backwards
-        startWith = (endWith - 2*this.step > 0) ? endWith - 2*this.step : 1;
+      startWith = (endWith - 2*this.step > 0) ? endWith - 2*this.step : 1;
     }
 
     // [startWith..endWith].map

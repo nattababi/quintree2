@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
+import ProtectedRoute from './components/protectedRoute';
 import NavBar from './components/navBar';
 import History from './components/history';
 import Dashboard from './components/dashboard';
@@ -10,44 +11,75 @@ import LoginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
 import Logout from './components/logout';
 import Profile from './components/profile';
-import auth from './services/authService';
+import { Provider } from 'mobx-react';
+//import { observer } from 'mobx-react';
+import * as stores from './stores';
 
 class App extends Component {
-  
+
   state = {};
 
+  static getDerivedStateFromProps() {
+    return null;
+  }
+
   componentDidMount() {
-    const user = auth.getCurrentUser();
-    this.setState({ user });
-    console.log('CDM', user);
+    //this.setState({ user });
+    console.log('CDM');
   }
 
   render() {
 
-    const { user } = this.state;
-    console.log('RENDER USER', user);
-    
     return (
       <main className="container">
-        <NavBar  user={user}/> 
-         <Switch> 
-          {/* <ProtectedRoute 
+        <Provider {...stores}>
+          <NavBar />
+          <Switch>
+            {/* <ProtectedRoute 
             path="/movies/:id"
             component={MovieDetails}
           /> */}
-          {/* <Route path="/history"
+            {/* <Route path="/history"
             render={props => <Movies {...props} user={user} />} /> */}
-          <Route path="/history" component={History} />
+            {/* <Route
+            path='/history'
+            component={() => <History user={user} />}
+          /> */}
+            <ProtectedRoute
+              path="/history"
+              component={History}
+            />
+            <ProtectedRoute
+              path="/dashboard"
+              component={Dashboard}
+            />
+            <ProtectedRoute
+              path="/groups"
+              component={Groups}
+            />
+            <ProtectedRoute
+              path="/users"
+              component={Users}
+            />
+            <ProtectedRoute
+              path="/profile"
+              component={Profile}
+            />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/register" component={RegisterForm} />
+            {/* <Route path="/history" component={History} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/groups" component={Groups} />
           <Route path="/users" component={Users} />
           <Route path="/login" component={LoginForm} />
           <Route path="/logout" component={Logout} />
           <Route path="/register" component={RegisterForm} />
-          <Route path="/user" component={Profile} />
-          {/* <Redirect exact from="/" to="/session" /> */}
-          {/* <Redirect to="/not-found" /> */}
-        </Switch>
+          <Route path="/user" component={Profile} /> */}
+            {/* <Redirect exact from="/" to="/session" /> */}
+            {/* <Redirect to="/not-found" /> */}
+          </Switch>
+        </Provider>
       </main>
     );
   }

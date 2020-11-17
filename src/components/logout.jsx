@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import auth from '../services/authService';
+import { inject } from 'mobx-react';
 
+@inject('userStore')
 class Logout extends Component {
   
-  componentDidMount() {
-    auth.logout();
-    window.location = '/';
+  async componentDidMount() {
+    await this.props.userStore.logout();
+    this.props.history.push('/login');
   }
 
   render() { 
