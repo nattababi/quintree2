@@ -1,0 +1,11 @@
+.flex-container {
+  display: flex;
+}
+
+.flex-child-menu {
+  flex: 0 1 160px;
+}
+
+.flex-child-info {
+  flex: 1;
+}

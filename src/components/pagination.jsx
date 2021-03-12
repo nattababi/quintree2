@@ -12,11 +12,11 @@ class Pagination extends Component {
   async componentDidMount() {
     //console.log("DID MOUNT pagination");
   }
-  
+
   onInputSliderChange = (param) => {
     this.props.onPageChange(Math.round(param.currentTarget.value));
   }
-  
+
   onPrev = (page) => {
     this.props.onPageChange(page - 1);
   }
@@ -31,15 +31,15 @@ class Pagination extends Component {
     const nextpage = page + 10 < lastpage ? page + 10 : lastpage;
     this.props.onPageChange(nextpage);
   }
-  
+
   render() {
-    
+
     //console.log("RENDER pagination");
-    
+
     const { itemsCount, pageSize, currentPage, onPageChange } = this.props;
 
     const pagesCount = Math.ceil(itemsCount / pageSize);
-    console.log("PAGESCOUNT>>>>>", itemsCount, pageSize, ":", pagesCount);
+    //console.log("PAGE:", currentPage, "from", pagesCount, ",showing", pageSize, "of", itemsCount, "items");
 
     if (pagesCount === 0) {
       return null;
@@ -48,17 +48,16 @@ class Pagination extends Component {
     //show only 'this.step' pages at once
 
     let startWith = (currentPage - this.step > 0) ? currentPage - this.step : 1;
-    const endWith = (startWith + this.step*2 > pagesCount) ? pagesCount : startWith + this.step*2;
-    
-    if ((endWith - startWith < 2*this.step) && (endWith - startWith)){
+    const endWith = (startWith + this.step * 2 > pagesCount) ? pagesCount : startWith + this.step * 2;
+
+    if ((endWith - startWith < 2 * this.step) && (endWith - startWith)) {
       // count backwards
-      startWith = (endWith - 2*this.step > 0) ? endWith - 2*this.step : 1;
+      startWith = (endWith - 2 * this.step > 0) ? endWith - 2 * this.step : 1;
     }
 
     // [startWith..endWith].map
     const pages = _.range(startWith, endWith + 1);
-    //const pages = _.range(startWith, endWith);
-
+    
     return (
       <div style={{ backgroundColor: '#fafafa', fontWeight: 'bold', padding: '1em', fontSize: '14px', marginTop: '0px' }}>
 
@@ -69,7 +68,7 @@ class Pagination extends Component {
               className={currentPage === 1 ? 'page-item disabled' : 'page-item'} style={{ cursor: 'pointer' }}>
               <div className="page-link" style={{ color: "#03A99E" }} onClick={() => this.onPrev10(currentPage)}>Prev</div>
             </li>
-            
+
             {pages.map(page => <li key={page}
               className={page === currentPage ? 'page-item active' : 'page-item'} style={{ cursor: 'pointer' }}>
               <div className="page-link" style={{ color: "#03A99E" }} onClick={() => onPageChange(page)}>{page}</div></li>)}

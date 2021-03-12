@@ -49,12 +49,13 @@ class RegisterForm extends Form {
 
   render() {
     return (
-    <React.Fragment>
-      <div style={{ marginTop: '10px', width:"500px"}}>
+    <div style={{marginLeft: '10px', marginBottom: '10px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', width: '95%', maxWidth: '400px'}}>
+      
+      <div style={{ marginTop: '10px'}}>
         <RegisterFormHeader/>
       </div>
 
-      <div style={{ padding:'5px', marginTop: '4px', width:"500px", backgroundColor: '#fafafa'}}>
+      <div style={{ padding:'10px', marginTop: '4px', backgroundColor: '#fafafa'}}>
         <form onSubmit={this.handleSubmit}>
           {this.renderInputWithLabel('firstName', 'First name')}
           {this.renderInputWithLabel('lastName', 'Last name')}
@@ -66,7 +67,7 @@ class RegisterForm extends Form {
           {this.renderButton("CREATE NEW ACCOUNT")}
         </form>
       </div>
-    </React.Fragment>);
+    </div>);
   }
 }
 

@@ -10,3 +10,8 @@
 .flex-child-element {
   flex: 1;
 }
+
+input[type=radio] {
+  width: 15px;
+  height: 15px;
+}

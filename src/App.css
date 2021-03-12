@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.container {
+  padding: 0;
+  margin: 0;
+  /*background-color: #e0e0e0;*/
+}
+
+.root {
+  margin: 0;
+  width: 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -39,8 +50,6 @@
 
 body {
 	font-size : 10pt;
-	margin-left : 5%;
-	margin-right : 7%;
 	font-family: arial,univers,times,fantasy,verdana,helvetica;
 	color : #35311E;
 	background : #DDDDDD
@@ -51,6 +60,7 @@ input[type='range'] {
   height: 30px;
   overflow: hidden;
   cursor: pointer;
+  padding: 5px;
 }
 
 input[type='range'],
@@ -73,12 +83,4 @@ input[type='range']::-webkit-slider-thumb {
   border-radius: 50%;
   border: 2px solid white;
 }
-/* input[type='range']::-webkit-slider-thumb::before {
-  position: absolute;
-  content: '';
-  height: 10px; // equal to height of runnable track
-  width: 500px; // make this bigger than the widest range input element
-  left: -502px; // this should be -2px - width
-  top: 8px; // don't change this
-  background: #777;
-} */
+

@@ -43,6 +43,8 @@ class History extends Component {
 
   customUpdateStatus = async (location) => {
 
+    console.log("customUpdateStatus");
+
     const parsed = queryString.parse(location.search);
 
     if (!parsed.page) {
@@ -94,14 +96,15 @@ class History extends Component {
     }
 
     newState.historyItems = items;
-    console.log(items);
+    
+    //console.log(items);
     this.setState(newState);
 
   }
 
   webHistoryListener = (location, action) => {
     console.log("webHistoryListener")
-    if (location.pathname === '/history') {
+    if (location.pathname === '/session/history') {
       this.customUpdateStatus(location);
     }
   }

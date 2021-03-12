@@ -4,10 +4,10 @@ import Joi from 'joi-browser';
 import { Redirect } from 'react-router-dom';
 import auth from '../services/authService';
 import LoginFormHeader from './loginFormHeader';
-import { observable, action } from 'mobx';
 import { inject } from 'mobx-react';
 
 @inject('userStore')
+
 class LoginForm extends Form {
   state = {
     data: { email: '', password: '' },
@@ -26,8 +26,8 @@ class LoginForm extends Form {
 
       const { state } = this.props.location;
       //window.location = state ? state.from.pathname : '/';
-      console.log('redirect to history');
-      this.props.history.push('/history');
+      console.log('Redirect to history', this.props.history);
+      this.props.history.push('/session/history');
     }
     catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -43,22 +43,23 @@ class LoginForm extends Form {
   }
 
   render() {
-    if (auth.getCurrentUser()) return <Redirect to="/" />;
+    if (auth.getCurrentUser()) return <Redirect to="/session/dashboard" />;
     return (
-      <React.Fragment>
-        <div style={{ marginTop: '10px', width: "350px" }}>
+      <div style={{marginLeft: '10px', marginBottom: '10px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', width: '95%', maxWidth: '360px'}}>
+        
+        <div style={{ marginTop: '10px'}}>
           <LoginFormHeader />
         </div>
 
-        <div style={{ padding: '5px', marginTop: '4px', width: "350px", backgroundColor: '#fafafa' }}>
-          <form onSubmit={this.handleSubmit}>
+        <div style={{ padding: '5px', marginTop: '4px', backgroundColor: '#fafafa' }}>
+          <form onSubmit={this.handleSubmit} style={{padding: '10px'}}>
             {this.renderInputWithLabel('email', 'Email')}
             {this.renderInputWithLabel('password', 'Password', 'password')}
             {this.renderButton("Login")}
           </form>
         </div>
-        
-      </React.Fragment>
+
+      </div>
     );
   }
 }
