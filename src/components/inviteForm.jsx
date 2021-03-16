@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Joi from 'joi-browser';
 import Form from './form';
 import InviteFormHeader from './inviteFormHeader';
+import styles from './form.module.css';
 
 class InviteForm extends Form {
   state = {
@@ -40,25 +41,30 @@ class InviteForm extends Form {
   render() {
 
     return (
-      <div>
-        <React.Fragment>
-          <div style={{ marginTop: '10px', width: "350px" }}>
-            <InviteFormHeader />
-          </div>
+      <div className={styles['card-parent']}>
 
-          <div style={{ padding: '5px', marginTop: '4px', width: "350px", backgroundColor: '#fafafa' }}>
+        <div className={styles['card-wrapped']}>
+          <div className={styles['card', 'card-wide']} style={{boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+            
+            <div style={{ marginTop: '10px'}}>
+            <InviteFormHeader />
+            </div>
+
+            <div style={{ padding: '10px', marginTop: '4px', backgroundColor: '#fafafa' }}>
             <form onSubmit={this.handleSubmit}>
-              {this.renderInputWithLabel('email', 'Email')}
-              {this.renderInputWithLabel('phone', 'Phone', 'tel')}
-              {this.renderInputWithLabel('dob', 'DOB', 'date')}
-              {this.renderGender('gender', 'Gender')}
-              {this.renderInputWithLabel('complaint', 'Complaint')}
-              {this.renderButton("Invite")}
-            </form>
+                {this.renderInputWithLabel('email', 'Email', 'email')}
+                {this.renderInputWithLabel('phone', 'Phone', 'tel')}
+                {this.renderInputWithLabel('dob', 'DOB', 'date')}
+                {this.renderGender('gender', 'Gender')}
+                {this.renderInputWithLabel('complaint', 'Complaint')}
+                {this.renderButton("Invite")}
+              </form>
+            </div>
           </div>
-        
-        </React.Fragment>
+        </div>
       </div>
+
+      
     );
   }
 }

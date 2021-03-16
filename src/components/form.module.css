@@ -1,4 +1,3 @@
-
 .flex-form {
   display: flex;
 }
@@ -11,7 +10,95 @@
   flex: 1;
 }
 
-input[type=radio] {
+:required {
+  border-color: red;
+
+}
+
+/* appearance for checked radiobutton */
+/* completely hiding radio button */
+input[type="radio"] {
+  margin-top: 10px;
+  display: none;
+}
+
+/* simulate radiobutton appearance using pseudoselector */
+input[type="radio"] + label:before {
+  content: "";
+  /* create custom radiobutton appearance */
+  display: inline-block;
   width: 15px;
   height: 15px;
+  padding: 3px;
+  margin-right: 5px;
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 1px solid #03a99e;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+/* appearance of checked radiobutton */
+input[type="radio"]:checked + label:before {
+  background-color: #03a99e;
+}
+
+/* resetting default box-sizing */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.btn-quintree {
+  background-color: #03a99e;
+  font-weight: bold;
+  padding: 0.8em;
+  font-size: 14px;
+  color: #fff;
+  border: 0;
+  border-radius: 5px
+}
+
+.btn-quintree:disabled {
+  background-color: #dcdcdc;
+  font-weight: bold;
+  padding: 0.8em;
+  font-size: 14px;
+  color: #a3a3a3;
+  border: 0;
+  border-radius: 5px
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-normal {
+  width: 320px;
+}
+
+.card-wide {
+  width: 400px;
+}
+
+.card-wrapped {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  text-align: left;
+}
+
+.card-parent {
+  display: block;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.quintree-header {
+  background-color: #fafafa;
+  font-weight: bold;
+  padding: 0.6em;
+  font-size: 14px;
+  color: #9e9e9e;
 }

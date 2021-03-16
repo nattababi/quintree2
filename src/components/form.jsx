@@ -75,9 +75,9 @@ class Form extends Component {
 
   renderButton(label) {
     return <div style={{marginTop: "10px"}}>
-      <button style={{backgroundColor: '#03a99e', fontWeight: 'bold', padding: '1em', fontSize: '14px', color: '#fff', border: "0px"}}
-      disabled={this.validate()}
-      className="btn btn-primary">{label}
+      <button
+        disabled={this.validate()}
+        className={styles['btn-quintree']}>{label}
     </button>
     </div>
   }
@@ -120,16 +120,19 @@ class Form extends Component {
     return (
 
     <div className={styles['flex-form']} style={{ marginTop: '5px', marginBottom: '0px'}}>
-      <div className={styles['flex-child-label']} style={{ marginTop: '8px'}}>
+      <div className={styles['flex-child-label']} style={{ marginTop: '7px'}}>
         {<label style={{color: '#9e9e9e'}} htmlFor={name}>{label}</label>}
       </div>
-      <div className={styles['flex-child-element']}>
+      
+      <div className={styles['flex-child-element']} style={{marginTop:'10px'}}>
     
-        <label htmlFor="male">Male</label>
-        <input className="m-2" type="radio" name="gender" id="male" value="male" onChange={this.handleChange}/>
-        <label htmlFor="female">Female</label>
-        <input className="m-2" type="radio" name="gender" id="female" value="female" onChange={this.handleChange}/>
-    
+        <input type="radio" name="gender" id="male" value="male" onChange={this.handleChange}/>
+        <label style={{marginTop: 'auto', marginLeft: '2px', padding: '0px', marginRight:'10px'}} htmlFor="male">Male</label>
+        
+        <input type="radio" name="gender" id="female" value="female" onChange={this.handleChange}/>
+        <label style={{marginTop: 'auto', marginLeft: '2px', padding: '0px', marginRight:'10px'}} htmlFor="female">Female</label>
+
+
       </div>
     </div>
     )

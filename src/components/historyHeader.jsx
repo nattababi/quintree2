@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { svgHistoryIcon } from '../svgIcons/main';
+import styles from './form.module.css';
 
 class HistoryHeader extends Component {
   render() {
     return (
-      <div style={{ backgroundColor: '#fafafa', fontWeight: 'bold', padding: '1em', fontSize: '14px' }}>
+      <div className={styles['quintree-header']}>
         {svgHistoryIcon} History
       </div>
     );

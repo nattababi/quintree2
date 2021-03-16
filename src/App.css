@@ -31,7 +31,6 @@
 .container {
   padding: 0;
   margin: 0;
-  /*background-color: #e0e0e0;*/
 }
 
 .root {
@@ -48,11 +47,18 @@
   }
 }
 
-body {
-	font-size : 10pt;
-	font-family: arial,univers,times,fantasy,verdana,helvetica;
-	color : #35311E;
-	background : #DDDDDD
+li {
+  color: 'white';
+}
+
+li:hover {
+  color: 'black';
+}
+
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
 }
 
 input[type='range'] {
@@ -83,4 +89,3 @@ input[type='range']::-webkit-slider-thumb {
   border-radius: 50%;
   border: 2px solid white;
 }
-

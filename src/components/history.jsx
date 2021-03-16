@@ -187,6 +187,13 @@ class History extends Component {
 
     const result = this.state.historyItems;
 
+    if (result.length === 0) return (
+      <div style={{ marginTop: '10px', color: '#9e9e9e' }}>
+        <HistoryHeader />
+        <div style={{marginLeft: '10px'}}>No history data found for this user</div>
+      </div>
+    );
+
     const { pageSize, currentPage, sortColumn, total, currentSearch } = this.state;
 
     return (
