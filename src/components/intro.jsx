@@ -6,7 +6,7 @@ import styles from './form.module.css';
 class Intro extends Component {
 
   componentDidMount(){
-    console.log('history=', this.props.history);
+    //console.log('history=', this.props.history);
   }
 
   render() {

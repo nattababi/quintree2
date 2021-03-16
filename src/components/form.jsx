@@ -13,10 +13,16 @@ class Form extends Component {
   }
 
   validate = () => {
+    console.log('joi form validattion');
+    
     const options = { abortEarly: false };
+
+    //console.log('data for joi',this.state.data);
 
     const { error } = Joi.validate(this.state.data, this.schema, options);
 
+    //console.log("ERROR", error);
+    
     if (!error) {
       return null;
     }
@@ -56,6 +62,8 @@ class Form extends Component {
   };
 
   handleChange = ({ currentTarget: input }) => {
+
+    console.log("handleChange parent");
 
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);

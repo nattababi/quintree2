@@ -36,7 +36,6 @@ class App extends Component {
 
   render() {
 
-    console.log('histoty app', this.props.history);
     return (
       <main>
         <Provider {...stores}>

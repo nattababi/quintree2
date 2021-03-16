@@ -10,8 +10,7 @@ import styles from './form.module.css';
 class RegisterForm extends Form {
   state = {
     data: { firstName: '', lastName: '', email: '', password: '', isVerified: false },
-    errors: {},
-    isVerified: false
+    errors: {}
   };
 
   schema = {
@@ -44,22 +43,16 @@ class RegisterForm extends Form {
 
   doSubmit = async () => {
     try {
-      console.log('2', this.state.isVerified);
-      if (this.state.isVerified ) {
-        console.log('22');
+      console.log(this.state.data.isVerified);
+      if (this.state.data.isVerified ) {
         const response = await userService.register(this.state.data);
-        console.log('222');
-        auth.loginWithJwt(response.headers['x-auth-token']);
-        console.log('2222');
-        console.log("response", response);
-        console.log('22222');
+        auth.loginWithJwt(response.headers['authorization']);
         window.location = '/';
-        console.log('222222');
       }
     }
-
     catch (ex) {
-      console.log('3');
+      alert('Error '+ ex.response.status + '(' + ex.response.data +') from the server');
+      console.log(ex.response);
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;

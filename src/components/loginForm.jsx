@@ -22,23 +22,16 @@ class LoginForm extends Form {
   }
 
   doSubmit = async () => {
-    console.log('1');
     try {
-      console.log('2');
       const { data } = this.state;
       await this.props.userStore.login(data);
-      console.log('22', this.props.location);
       const { state } = this.props.location;
-      console.log('222');
       
       //window.location = state ? state.from.pathname : '/';
       console.log('Redirect to history', this.props.history);
-      console.log('2222');
       this.props.history.push('/session/history');
-      console.log('22222');
     }
     catch (ex) {
-      console.log('3');
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;
@@ -49,6 +42,8 @@ class LoginForm extends Form {
 
   componentDidMount() {
     //this.username.current.focus();
+    console.log('cdm-',this.state.data.email);
+    //setTimeout(this.validate(), 2000);
   }
 
   render() {

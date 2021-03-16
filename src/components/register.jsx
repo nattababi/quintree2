@@ -6,7 +6,7 @@ import RegisterForm from './registerForm';
 class Register extends Component {
 
   componentDidMount(){
-    console.log('history register=', this.props.history);
+    //console.log('history register=', this.props.history);
   }
 
   render() {
