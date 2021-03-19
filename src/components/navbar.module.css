@@ -11,6 +11,26 @@
   background-color: #fff;
 }
 
+.nav-link:hover {
+  color: #6c6cc6;
+  background-color: #fff;
+}
+
+.nav-link-custom:hover{
+  padding-top: 4px;
+  border-bottom: 0px solid transparent;
+  text-shadow: 1px 1px 3px rgb(0 0 0 / 90%);
+  background-color: hsla(0,0%,100%,.1);
+  border-bottom-color: hsla(0,0%,100%,.8);
+  transition: border-bottom-color .14s,background-color .56s,text-shadow .14s
+}
+
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.05em);
+}
+
 .Link {
   color: #6c6cc6;
 }

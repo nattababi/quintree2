@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 class Footer extends Component {
   render() {
     return (
-      <div>
-        
-        
+      <div>     
         <nav className="nav fixed-bottom navbar-dark bg-dark justify-content-center">
           <div style={{display: 'block'}}>
             <div style={{display: 'inline-block', margin: 'auto'}}>
@@ -18,10 +16,7 @@ class Footer extends Component {
               <a className="nav-link" href="/site/terms" style={{ color: '#9e9e9e', fontSize: 'smaller' }}>Terms</a>
             </div>
          </div>
- 
       </nav>
-        
-
       </div>
     );
   }

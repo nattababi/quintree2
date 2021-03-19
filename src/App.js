@@ -40,7 +40,7 @@ class App extends Component {
       <main>
         <Provider {...stores}>
           <NavBar/>
-          <Footer />
+          {/* <Footer /> */}
           <Switch>
             <ProtectedRoute path="/session/history" component={History} />
             <ProtectedRoute path="/session/dashboard" component={Dashboard} />
